@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Comfortaa");
+
+html, body {
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  font-family: "Comfortaa", cursive;
+  /* Важно для игр: отключаем выделение текста и синие рамки при кликах */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+  background-color: #D0CBC7;
+}
+
+#container #score {
+  position: absolute;
+  top: 5vh;
+  width: 100%;
+  text-align: center;
+  font-size: 10vh;
+  font-weight: bold;
+  pointer-events: none;
+  z-index: 10;
+  color: #333344;
+  /* Начальное положение счета (спрятан вверху) */
+  transform: translateY(-200px);
+  transition: transform 0.5s ease;
+}
+
+/* Когда игра началась, показываем счет */
+#container.playing #score {
+  transform: translateY(0);
+}
+
+#container #game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Общие стили для экранов Готовности и Проигрыша */
+.game-ready, .game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  background: rgba(208, 203, 199, 0.8);
+  text-align: center;
+  transition: opacity 0.5s ease;
+}
+
+#start-button {
+  padding: 15px 40px;
+  border: 3px solid #333344;
+  font-size: 24px;
+  background: white;
+  color: #333344;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 4px 0 #333344;
+}
+
+#start-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #333344;
+}
+
+/* Управление видимостью экранов */
+.game-over { display: none; }
+.game-ready { display: flex; }
+
+#container.playing .game-ready { display: none; }
+#container.playing .game-over { display: none; }
+
+#container.ended .game-over { display: flex; }
+
+#instructions {
+  position: absolute;
+  bottom: 10vh;
+  width: 100%;
+  text-align: center;
+  color: #333344;
+  font-size: 16px;
+  z-index: 5;
+}
